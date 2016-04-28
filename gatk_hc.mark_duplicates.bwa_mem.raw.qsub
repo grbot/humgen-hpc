@@ -1,0 +1,53 @@
+#!/bin/bash
+#PBS -N gatk_hc.mark_duplicates.bwa_mem.raw
+#PBS -S /bin/bash
+#PBS -q UCTlong
+#PBS -l nodes=1:series600:ppn=8
+#PBS -l walltime=03:00:00
+#PBS -m abe
+#PBS -d /home/gerrit/humgen-hpc/data/process/
+#PBS -M gerrit.botha@uct.ac.za
+
+## Read config file
+config="/home/gerrit/humgen-hpc/scripts/config.txt"
+. $config
+
+start_time=$(date +%s)
+
+## Create tmp dir if it does not exist
+if [ ! -d $tmp_dir ];
+ then
+   mkdir -p $tmp_dir
+fi
+
+cmd="$java_base/java -Djava.io.tmpdir=$tmp_dir -jar $gatk_base/GenomeAnalysisTK.jar  \
+-l INFO \
+-T HaplotypeCaller \
+-R $ref \
+-L 1 \
+-I $marked_duplicates_bam \
+--dbsnp $dbsnp_sites \
+-stand_call_conf 50.0 \
+-stand_emit_conf 10.0 \
+--genotyping_mode DISCOVERY \
+--annotation Coverage \
+--annotation QualByDepth \	
+--annotation FisherStrand \
+--annotation RMSMappingQuality \
+--annotation MappingQualityRankSumTest \
+--annotation ReadPosRankSumTest \
+--annotation StrandOddsRatio \
+--annotation MappingQualityZeroBySample \
+--annotation StrandBiasBySample \
+--annotation InbreedingCoeff \
+-nt 1 \
+-nct 1 \
+-o $gatk_raw_calls"
+
+echo $cmd
+eval $cmd
+
+end_time=$(date +%s)
+diff_time=$(( $end_time - $start_time ))
+echo "$diff_time seconds"
+echo "`echo "scale=2;$diff_time/60" | bc` minutes"

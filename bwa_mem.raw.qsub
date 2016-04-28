@@ -1,0 +1,31 @@
+#!/bin/bash
+#PBS -N bwa.raw
+#PBS -S /bin/bash
+#PBS -q UCTlong
+#PBS -l nodes=1:series600:ppn=24
+#PBS -l walltime=01:00:00
+#PBS -m abe
+#PBS -d /home/gerrit/humgen-hpc/data/process/
+#PBS -M gerrit.botha@uct.ac.za
+
+## Read config file
+config="/home/gerrit/humgen-hpc/scripts/config.txt"
+. $config
+
+start_time=$(date +%s)
+
+## Create out dir if it does not exist
+if [ ! -d $bwa_out_dir ];
+ then
+   mkdir -p $bwa_out_dir
+fi
+
+cmd="$bwa_base/bwa mem -R \"@RG\tID:UIUCSimRG\tLB:UIUCSimLB\tSM:UIUCSim\tPL:Illumina\" -M -t $bwa_cores $ref $raw_read_1 $raw_read_2 | $samtools_base/samtools view -ubhS - | $samtools_base/samtools sort - $sorted_bam"
+
+echo $cmd
+eval $cmd
+
+end_time=$(date +%s)
+diff_time=$(( $end_time - $start_time ))
+echo "$diff_time seconds"
+echo "`echo "scale=2;$diff_time/60" | bc` minutes"

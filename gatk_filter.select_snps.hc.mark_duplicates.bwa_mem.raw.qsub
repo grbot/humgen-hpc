@@ -1,0 +1,62 @@
+#!/bin/bash
+#PBS -N gatk_filter.select_snps.hc.mark_duplicates.bwa_mem.raw
+#PBS -S /bin/bash
+#PBS -q UCTlong
+#PBS -l nodes=1:series600:ppn=1
+#PBS -l walltime=01:00:00
+#PBS -m abe
+#PBS -d /home/gerrit/humgen-hpc/data/process/
+#PBS -M gerrit.botha@uct.ac.za
+
+set -x
+## Read config file
+config="/home/gerrit/humgen-hpc/scripts/config.txt"
+. $config
+
+start_time=$(date +%s)
+
+## Create tmp dir if it does not exist
+if [ ! -d $tmp_dir ];
+ then
+   mkdir -p $tmp_dir
+fi
+
+$java_base/java -Djava.io.tmpdir=$tmp_dir -jar $gatk_base/GenomeAnalysisTK.jar \
+-l INFO \
+-R $ref \
+-T VariantFiltration \
+--variant $gatk_raw_snps \
+--clusterWindowSize 10 \
+--filterExpression "MQ0>= 4 && ((MQ0/ (1.0 * DP)) > 0.1)" \
+--filterName "HARD_TO_VALIDATE" \
+--filterExpression "DP < 5" \
+--filterName "LowCoverage" \
+--filterExpression "QUAL < 30.0" \
+--filterName "VeryLowQual" \
+--filterExpression "QUAL > 30.0 && QUAL < 50.0" \
+--filterName "LowQual" \
+--filterExpression "QD < 1.5" \
+--filterName "LowQD" \
+--filterExpression "SB > -10.0" \
+--filterName "StrandBias" \
+-L 1 \
+-o $gatk_raw_snps_tagged
+
+cmd="$java_base/java -Djava.io.tmpdir=$tmp_dir -jar $gatk_base/GenomeAnalysisTK.jar \
+-l INFO \
+-R $ref \
+-T SelectVariants \
+-V $gatk_raw_snps_tagged \
+-o $gatk_filtered_snps  \
+--excludeFiltered \
+-L 1 \
+-nt 1 \
+-nct 1"
+
+echo $cmd
+eval $cmd
+
+end_time=$(date +%s)
+diff_time=$(( $end_time - $start_time ))
+echo "$diff_time seconds"
+echo "`echo "scale=2;$diff_time/60" | bc` minutes"

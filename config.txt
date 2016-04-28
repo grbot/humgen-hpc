@@ -1,0 +1,36 @@
+# Db paths
+gatk_resource_bundle=/scratch/DB/bio/gatk/2.8/b37
+ref=$gatk_resource_bundle/human_g1k_v37_decoy.fasta
+dbsnp_sites=$gatk_resource_bundle/dbsnp_138.b37.vcf
+
+# Input/output paths
+project_dir=/home/gerrit/humgen-hpc
+data_dir=$project_dir/data
+tmp_dir=$data_dir/tmp
+
+raw_read_dir=$data_dir/raw/reads
+raw_read_1=$raw_read_dir/UCSC_chr1_With_SyntheticVariants_And_ERR250949_Variants_Exome_50X_UIUCsimulated_read1.fq
+raw_read_2=$raw_read_dir/UCSC_chr1_With_SyntheticVariants_And_ERR250949_Variants_Exome_50X_UIUCsimulated_read2.fq
+
+fastqc_out_dir=$data_dir/process/fastqc
+
+bwa_out_dir=$data_dir/process/bwa
+sorted_bam=$bwa_out_dir/UCSC_chr1_With_SyntheticVariants_And_ERR250949_Variants_Exome_50X_UIUCsimulated.bwa.sorted
+marked_duplicates_bam=$bwa_out_dir/UCSC_chr1_With_SyntheticVariants_And_ERR250949_Variants_Exome_50X_UIUCsimulated.bwa.sorted.duplicates_marked.bam
+
+gatk_raw_calls=$bwa_out_dir/UCSC_chr1_With_SyntheticVariants_And_ERR250949_Variants_Exome_50X_UIUCsimulated.bwa.sorted.duplicates_marked.raw.vcf.gz
+gatk_raw_snps=$bwa_out_dir/UCSC_chr1_With_SyntheticVariants_And_ERR250949_Variants_Exome_50X_UIUCsimulated.bwa.sorted.duplicates_marked.raw.SNPs.vcf.gz
+gatk_raw_snps_tagged=$bwa_out_dir/UCSC_chr1_With_SyntheticVariants_And_ERR250949_Variants_Exome_50X_UIUCsimulated.bwa.sorted.duplicates_marked.raw.SNPs.tagged.vcf.gz
+gatk_filtered_snps=$bwa_out_dir/UCSC_chr1_With_SyntheticVariants_And_ERR250949_Variants_Exome_50X_UIUCsimulated.bwa.sorted.duplicates_marked.raw.SNPs.tagged.filtered.vcf.gz
+
+# Software versions
+fastqc_base=/opt/exp_soft/fastqc-0.11.3
+bwa_base=/opt/exp_soft/bwa-0.7.12
+samtools_base=/opt/exp_soft/samtools-0.1.19
+java_base=/opt/exp_soft/java/jdk1.8.0_31/bin
+picard_base=/opt/exp_soft/picard-tools-1.98
+gatk_base=/opt/exp_soft/GATK-3.4.6
+
+# Tool specific settings
+fastqc_cores=2
+bwa_cores=24
