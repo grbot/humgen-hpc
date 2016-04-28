@@ -1,6 +1,6 @@
-The purpose of these scripts are to show how to use variant calling tools on the UCT hex cluster. It should not be considered as best practice steps for Human variant calling.
+The purpose of these scripts are to show how to use variant calling tools on the UCT hex cluster. It should not be considered as best practice for Human variant calling.
 
-1. Clone this repository into your local home directory on the cluster:
+1. Change to the humgen-hpc directory created earlier in the demonstration and then clone the repository: *git clone https://github.com/grbot/humgen-hpc.git scripts*
 
 2. Modify the *config.txt*. Change the project_dir path to point to location of where your processing would be done.
 
