@@ -5,10 +5,10 @@ dbsnp_sites=$gatk_resource_bundle/dbsnp_138.b37.vcf
 
 # Input/output paths
 project_dir=/home/gerrit/humgen-hpc
-data_dir=$project_dir/data
+data_dir=/researchdata/fhgfs/cbio/cbio/courses/IBS5003Z/variant_calling/gerrit
 tmp_dir=$data_dir/tmp
 
-raw_read_dir=$data_dir/raw/reads
+raw_read_dir=/researchdata/fhgfs/cbio/cbio/courses/IBS5003Z/variant_calling/
 raw_read_1=$raw_read_dir/UCSC_chr1_With_SyntheticVariants_And_ERR250949_Variants_Exome_50X_UIUCsimulated_read1.fq
 raw_read_2=$raw_read_dir/UCSC_chr1_With_SyntheticVariants_And_ERR250949_Variants_Exome_50X_UIUCsimulated_read2.fq
 
