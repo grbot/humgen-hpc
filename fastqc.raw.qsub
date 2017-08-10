@@ -22,7 +22,7 @@ if [ ! -d $fastqc_out_dir ];
 fi
 
 ## Create command string, record and run
-cmd="$fastqc_base/fastqc $raw_read_dir/* -f fastq -o $fastqc_out_dir -t $fastqc_cores"
+cmd="$fastqc_base/fastqc $raw_read_dir/*.fq -f fastq -o $fastqc_out_dir -t $fastqc_cores"
 echo $cmd
 eval $cmd
 
