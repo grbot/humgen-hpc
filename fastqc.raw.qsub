@@ -5,11 +5,11 @@
 #PBS -l nodes=1:series600:ppn=2
 #PBS -l walltime=01:00:00
 #PBS -m abe
-#PBS -d /home/gerrit/humgen-hpc/data/process/
+#PBS -d /researchdata/fhgfs/cbio/cbio/courses/IBS5003Z/variant_calling/gerrit/data/process/
 #PBS -M gerrit.botha@uct.ac.za
 
 ## Read config file
-config="/home/gerrit/humgen-hpc/scripts/config.txt"
+config="/home/gerrit/humgen-hpc/config.txt"
 . $config
 
 ## Record start time
