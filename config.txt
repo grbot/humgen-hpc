@@ -4,17 +4,16 @@ ref=$gatk_resource_bundle/human_g1k_v37_decoy.fasta
 dbsnp_sites=$gatk_resource_bundle/dbsnp_138.b37.vcf
 
 # Input/output paths
-project_dir=/home/gerrit/humgen-hpc
-data_dir=/researchdata/fhgfs/cbio/cbio/courses/IBS5003Z/variant_calling/gerrit
-tmp_dir=$data_dir/tmp
+output_dir=/researchdata/fhgfs/cbio/cbio/courses/IBS5004Z/variant_calling/gerrit
+tmp_dir=$output_dir/tmp
 
-raw_read_dir=/researchdata/fhgfs/cbio/cbio/courses/IBS5003Z/variant_calling/
+raw_read_dir=/researchdata/fhgfs/cbio/cbio/courses/IBS5004Z/variant_calling/
 raw_read_1=$raw_read_dir/UCSC_chr1_With_SyntheticVariants_And_ERR250949_Variants_Exome_50X_UIUCsimulated_read1.fq
 raw_read_2=$raw_read_dir/UCSC_chr1_With_SyntheticVariants_And_ERR250949_Variants_Exome_50X_UIUCsimulated_read2.fq
 
-fastqc_out_dir=$data_dir/process/fastqc
+fastqc_out_dir=$output_dir/process/fastqc
 
-bwa_out_dir=$data_dir/process/bwa
+bwa_out_dir=$output_dir/process/bwa
 sorted_bam=$bwa_out_dir/UCSC_chr1_With_SyntheticVariants_And_ERR250949_Variants_Exome_50X_UIUCsimulated.bwa.sorted
 marked_duplicates_bam=$bwa_out_dir/UCSC_chr1_With_SyntheticVariants_And_ERR250949_Variants_Exome_50X_UIUCsimulated.bwa.sorted.duplicates_marked.bam
 
