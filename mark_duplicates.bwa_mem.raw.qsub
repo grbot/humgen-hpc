@@ -2,10 +2,10 @@
 #PBS -N mark_duplicates.bwa_mem.raw
 #PBS -S /bin/bash
 #PBS -q UCTlong
-#PBS -l nodes=1:series600:ppn=8
+#PBS -l nodes=1:series600:ppn=10
 #PBS -l walltime=01:00:00
 #PBS -m abe
-#PBS -d /researchdata/fhgfs/cbio/cbio/courses/IBS5003Z/variant_calling/gerrit/process/
+#PBS -d /researchdata/fhgfs/cbio/cbio/courses/IBS5004Z/variant_calling/gerrit/process/
 #PBS -M gerrit.botha@uct.ac.za
 
 ## Read config file
